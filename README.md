@@ -2,13 +2,13 @@
 
 ## App is in the development stage!!!
 
-There is JWT-based authentication. Also you can see the swagger-documentation.
+There is JWT-based authentication. Also you can see the swagger-documentation.\
 
 To test the app, you have to run frontend and backend apps. To do it:
 1. Open terminal in the project's root folder
 2. To run the Backend with Maven-wrapper
     On Mac/Linux:
-    ```./mvnw spring-boot:run```
+    ```./mvnw spring-boot:run```\
     On Windows:
     ```mvnw.cmd spring-boot:run```
 3. To run the Frontend(npm is required):
