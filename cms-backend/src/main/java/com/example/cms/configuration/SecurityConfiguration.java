@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -22,7 +23,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-
     private final UserDetailsService userDetailsService;
 
     private final JwtFilter jwtFilter;
@@ -32,7 +32,8 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/auth", "/registration")
+                .antMatchers("/auth", "/registration", "/swagger-ui/**", "/cms-openapi/**")
+//                .antMatchers("/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -41,6 +42,11 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
+
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers("/swagger-ui/**")
+//    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

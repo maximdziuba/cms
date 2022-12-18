@@ -5,6 +5,10 @@ import com.example.cms.security.dto.JwtRequest;
 import com.example.cms.security.dto.JwtResponse;
 import com.example.cms.security.dto.UserDto;
 import com.example.cms.service.UserService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,12 +36,15 @@ class AuthController {
     private final UserDetailsService userDetailsService;
 
     @GetMapping
-    List<com.example.cms.model.User> welcome() {
+    @Operation(summary = "Get all users")
+    @SecurityRequirement(name = "Bearer Authentication")
+    List<com.example.cms.model.User> allUsers() {
         var users = userService.findAllUsers();
         return users;
     }
 
     @GetMapping("/whoami")
+    @SecurityRequirement(name = "Bearer Authentication")
     String whoAmI(Authentication authentication) {
         return authentication.getName();
     }
