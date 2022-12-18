@@ -17,7 +17,7 @@ To test the app, you have to run frontend and backend apps. To do it:
     2. Run the app
         ```npm start```
 4. The app is available on ```localhost:3000```
-5. If you want to test the API, it available on ```localhost:8080```.
+5. If you want to test the API, it available on ```localhost:8080```.\
 Swagger documentation is available on ```http://localhost:8080/swagger-ui.html```
 
 
