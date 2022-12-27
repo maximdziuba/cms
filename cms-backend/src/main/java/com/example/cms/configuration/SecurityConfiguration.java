@@ -32,7 +32,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/auth", "/registration", "/swagger-ui/**", "/cms-openapi/**")
+                .antMatchers("/auth", "/registration", "/swagger-ui/**", "/cms-openapi/**", "/pages/loginPage")
 //                .antMatchers("/**")
                 .permitAll()
                 .anyRequest()
