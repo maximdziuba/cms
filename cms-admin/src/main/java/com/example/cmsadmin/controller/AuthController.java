@@ -3,13 +3,13 @@ package com.example.cmsadmin.controller;
 import com.example.cmsadmin.dto.JwtRequest;
 import com.example.cmsadmin.dto.JwtResponse;
 import com.example.cmsadmin.security.JwtUtil;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,11 +19,11 @@ class AuthController {
 
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
-    private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
 
 
     @GetMapping("/whoami")
+    @SecurityRequirement(name = "Bearer Authentication")
     String whoAmI(Authentication authentication) {
         return authentication.getName();
     }
@@ -39,14 +39,4 @@ class AuthController {
         final String token = jwtUtil.generateToken(userDetails);
         return new JwtResponse(token);
     }
-
-//    @PostMapping("/registration")
-//    ResponseEntity saveUser(@RequestBody UserDto userDto) throws Exception {
-//        if (userService.findUserByEmail(userDto.getEmail()) != null) {
-//            throw new Exception("This user already exists");
-//        }
-//        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
-//        return ResponseEntity.ok(userService.saveUser(userDto));
-//    }
-
 }
