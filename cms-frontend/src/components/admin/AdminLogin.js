@@ -3,7 +3,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import CssBaseline from '@mui/material/CssBaseline';
-import ResponsiveAppBar from './Navbar';
+import ResponsiveAppBar from '../Navbar';
 import { Grid } from "@mui/material";
 import { Paper } from "@mui/material";
 import { TextField } from "@mui/material";
@@ -13,9 +13,9 @@ import { Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
-import AuthService from "../services/AuthService";
+import AdminAuthService from "../../services/AdminAuthService";
 
-import { withRouter } from "../with-router";
+import { withRouter } from "../../with-router";
 
 const theme = createTheme();
 
@@ -35,7 +35,7 @@ function findElementInArray(elements, name) {
   return elementText;
 }
 
-class Login extends Component {
+class AdminLogin extends Component {
   constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
@@ -89,7 +89,7 @@ class Login extends Component {
     const email = data.get('email');
     const password = data.get('password');
     
-      AuthService.login(email, password).then(
+      AdminAuthService.login(email, password).then(
         () => {
           this.props.router.navigate("/home");
           window.location.reload();
@@ -193,4 +193,4 @@ class Login extends Component {
   }
 }
 
-export default withRouter(Login);
+export default withRouter(AdminLogin);

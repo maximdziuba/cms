@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 import SignInSide from './components/Login.js'
 import MainPage from "./components/MainPage";
+import AdminLogin from './components/admin/AdminLogin';
 
 
 class App extends React.Component {
@@ -13,6 +14,7 @@ class App extends React.Component {
         <Routes>
             <Route path="/" element={<SignInSide />} />
             <Route path="/home" element={<MainPage />} />
+            <Route path="/admin/login" element={<AdminLogin />}/>
         </Routes>
             
         </BrowserRouter>
